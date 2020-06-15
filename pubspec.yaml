@@ -1,0 +1,41 @@
+name: wheatherapp
+description: A Flutter application, which can help you be informed about wheather.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.2
+  moor_flutter: ^3.0.0
+  http: ^0.12.1
+  json_annotation: ^3.0.0
+  provider: ^4.0.1
+  chewie: ^0.9.10
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.7.4
+  build_runner: ^1.0.0
+  moor_generator: ^3.1.0
+  json_serializable: ^3.2.0
+
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/video/
+
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf
+          weight: 700
