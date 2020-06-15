@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/moore_database.dart';
 import '../screens/today_weather.dart';
 import '../services/weather_api_helper.dart';
 
@@ -18,9 +20,20 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
     WeatherGetter weatherGetter = WeatherGetter();
 
-    await weatherGetter
-        .getWeatherInCity(cityName, ctx)
-        .then((_) => Navigator.pushNamed(context, WeatherToday.routeName));
+    await weatherGetter.getWeatherInCity(cityName, ctx).then((_) =>
+        Navigator.pushNamedAndRemoveUntil(
+            context, WeatherToday.routeName, (Route<dynamic> route) => false));
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _deleteItem();
+  }
+
+  Future _deleteItem() async {
+    var database = Provider.of<AppDatabase>(context);
+    await database.resetDb();
   }
 
   @override
@@ -31,6 +44,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _deleteItem();
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.only(bottom: 20.0),

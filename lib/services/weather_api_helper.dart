@@ -18,7 +18,8 @@ class WeatherGetter {
     return locationInfo;
   }
 
-  Future getWeatherInCity(String cityName, BuildContext context) async {
+  Future<dynamic> getWeatherInCity(
+      String cityName, BuildContext context) async {
     var info = await getWoeid(cityName);
     int woeid = info[0]['woeid'];
 
@@ -57,6 +58,8 @@ class WeatherGetter {
       WeatherData data = WeatherData.fromJson(json);
       var database = Provider.of<AppDatabase>(context, listen: false);
       database.insertWeatherData(data);
+
+      return data;
     } catch (e) {
       print('error from getWeatherInCity method = $e');
     }

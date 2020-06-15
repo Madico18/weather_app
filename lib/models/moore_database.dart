@@ -31,7 +31,12 @@ class AppDatabase extends _$AppDatabase {
   Stream<List<WeatherData>> watchWeather() => select(weather).watch();
   Future insertWeatherData(WeatherData data) => into(weather).insert(data);
   Future updateWeatherData(WeatherData data) => update(weather).replace(data);
+  Future deleteWeatherData(WeatherData data) => delete(weather).delete(data);
   Future<int> addWeather(WeatherCompanion entry) {
     return into(weather).insert(entry);
+  }
+
+  Future resetDb() async {
+    await delete(weather).go();
   }
 }
